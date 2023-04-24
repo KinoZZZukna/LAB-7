@@ -1,0 +1,66 @@
+CREATE TABLE `Products` (
+  `product_id` int(11) PRIMARY KEY,
+  `Product_name` varchar(30),
+  `Calories` int(11),
+  `Proteins` int(11),
+  `Fats` int(11),
+  `Carbohydrates` int(11),
+  `Category` varchar(30),
+  `Weight` int(11)
+);
+
+CREATE TABLE `Menu` (
+  `menu_id` int(11) PRIMARY KEY,
+  `Menu_name` varchar(30),
+  `Menu_type` varchar(30),
+  `Variety` varchar(30)
+);
+
+CREATE TABLE `Diet` (
+  `diet_id` int(11) PRIMARY KEY,
+  `Diet_name` varchar(30),
+  `Number_of_meals` int(11)
+);
+
+CREATE TABLE `User` (
+  `user_id` int(11) PRIMARY KEY,
+  `User_name` varchar(30),
+  `Gender` varchar(30),
+  `Age` int(11),
+  `Date_of_birth` date,
+  `Height` int(11),
+  `Weight` int(11),
+  `Activity_level` varchar(30)
+);
+
+CREATE TABLE `Product_Menu` (
+  `product_menu_id` int(11) PRIMARY KEY,
+  `product_id` int(11),
+  `menu_id` int(11),
+  `quantity` int(11)
+);
+
+CREATE TABLE `Diet_Menu` (
+  `diet_menu_id` int(11) PRIMARY KEY,
+  `diet_id` int(11),
+  `menu_id` int(11),
+  `quantity` int(11)
+);
+
+CREATE TABLE `User_Diet` (
+  `user_diet_id` int(11) PRIMARY KEY,
+  `user_id` int(11),
+  `diet_id` int(11)
+);
+
+ALTER TABLE `Product_Menu` ADD FOREIGN KEY (`product_id`) REFERENCES `Products` (`product_id`);
+
+ALTER TABLE `Product_Menu` ADD FOREIGN KEY (`menu_id`) REFERENCES `Menu` (`menu_id`);
+
+ALTER TABLE `Diet_Menu` ADD FOREIGN KEY (`diet_id`) REFERENCES `Diet` (`diet_id`);
+
+ALTER TABLE `Diet_Menu` ADD FOREIGN KEY (`menu_id`) REFERENCES `Menu` (`menu_id`);
+
+ALTER TABLE `User_Diet` ADD FOREIGN KEY (`user_id`) REFERENCES `User` (`user_id`);
+
+ALTER TABLE `User_Diet` ADD FOREIGN KEY (`diet_id`) REFERENCES `Diet` (`diet_id`);
